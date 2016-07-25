@@ -1,4 +1,4 @@
-﻿namespace MyProcessService
+﻿namespace ProcessRecordService
 {
     partial class ProjectInstaller
     {
@@ -40,7 +40,7 @@
             // serviceInstaller1
             // 
             this.serviceInstaller1.Description = "A sample service";
-            this.serviceInstaller1.DisplayName = "MyProcessService";
+            this.serviceInstaller1.DisplayName = "ProcessRecordService";
             this.serviceInstaller1.ServiceName = "Service1";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 

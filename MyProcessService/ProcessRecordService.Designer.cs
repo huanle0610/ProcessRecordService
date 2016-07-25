@@ -1,4 +1,4 @@
-﻿namespace MyProcessService
+﻿namespace ProcessRecordService
 {
     partial class Service1
     {
