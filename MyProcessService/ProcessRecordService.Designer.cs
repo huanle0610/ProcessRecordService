@@ -1,6 +1,6 @@
 ﻿namespace ProcessRecordService
 {
-    partial class Service1
+    partial class ProcessRecordService
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -31,9 +31,9 @@
             this.eventLog1 = new System.Diagnostics.EventLog();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
             // 
-            // Service1
+            // ProcessRecordService
             // 
-            this.ServiceName = "Service1";
+            this.ServiceName = "ProcessRecordService";
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
 
         }
