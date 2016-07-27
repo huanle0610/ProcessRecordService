@@ -25,7 +25,7 @@ namespace MyProcessService.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.61.1;Database=test;Uid=asan;Pwd=asan;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=192.168.61.1;Database=process_info155555;Uid=asan;Pwd=asan;")]
         public string connectionstring {
             get {
                 return ((string)(this["connectionstring"]));

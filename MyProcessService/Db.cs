@@ -56,13 +56,14 @@ namespace ProcessRecordService
                 //MessageBox.Show(exception, "Uncaught MYSQL Exception");
                 Debug(exception);
 
-                Environment.Exit(1);
+                //Environment.Exit(1);
             }
         }
 
         public void CloseConn()
         {
             bConnected = false;
+            parameters.Clear();
             connect.Close();
             connect.Dispose();
         }
@@ -78,32 +79,40 @@ namespace ProcessRecordService
             // Automatically disposes the MySQLcommand instance
             using (command = new MySqlCommand(Query, connect))
             {
-                // 
-                bind(bindings);
-
-                // Prevents SQL injection
-                if (parameters.Count > 0)
+                try
                 {
-                    parameters.ForEach(delegate (string parameter)
+                    bind(bindings);
+
+                    // Prevents SQL injection
+                    if (parameters.Count > 0)
                     {
-                        string[] sparameters = parameter.ToString().Split('\x7F');
-                        command.Parameters.AddWithValue(sparameters[0], sparameters[1]);
-                    });
+                        parameters.ForEach(delegate (string parameter)
+                        {
+                            string[] sparameters = parameter.ToString().Split('\x7F');
+                            command.Parameters.AddWithValue(sparameters[0], sparameters[1]);
+                        });
+                    }
+
+                    this.squery = Query.ToLower();
+
+                    if (squery.Contains("select"))
+                    {
+                        this.Table = execDatatable();
+                    }
+                    if (squery.Contains("delete") || squery.Contains("update") || squery.Contains("insert"))
+                    {
+                        this.affected_rows = execNonquery();
+                    }
+
+                    // Clear de parameters, 
+                    this.parameters.Clear();
                 }
-
-                this.squery = Query.ToLower();
-
-                if (squery.Contains("select"))
+                catch(Exception ex)
                 {
-                    this.Table = execDatatable();
+                    string exception = "Exception : " + ex.Message.ToString();
+                    // Console.WriteLine(exception + "/n/r");
+                    this.parameters.Clear();
                 }
-                if (squery.Contains("delete") || squery.Contains("update") || squery.Contains("insert"))
-                {
-                    this.affected_rows = execNonquery();
-                }
-
-                // Clear de parameters, 
-                this.parameters.Clear();
             }
         }
 
@@ -244,7 +253,7 @@ namespace ProcessRecordService
 
         public void Debug(string error)
         {
-            Console.WriteLine(error + "/n/r");
+            //Console.WriteLine(error + "/n/r");
         }
     }
 }

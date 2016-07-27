@@ -25,7 +25,7 @@ namespace ProcessRecordService
         private void serviceProcessInstaller1_AfterInstall(object sender, InstallEventArgs e)
         {
             /*
-            using (ServiceController sc = new ServiceController("ProcessRecordService"))
+            using (ServiceController sc = new ServiceController(serviceInstaller1.ServiceName))
             {
                 sc.Start();
             }
